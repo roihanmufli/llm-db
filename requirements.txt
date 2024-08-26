@@ -1,0 +1,52 @@
+# talk to docs
+langchain
+langchain-community
+langchain-core
+langchain-google-genai==1.0.7
+langchain-together
+langdetect
+langsmith
+lxml==4.9.4
+nltk==3.8.1
+numpy==1.26.2
+openai
+pydantic==2.5.3
+pydantic_core==2.14.6
+PyMuPDF==1.23.21
+pypdf==3.17.4
+pypdfium2==4.25.0
+scipy==1.12.0
+sentence-transformers==2.3.1
+tiktoken==0.5.2
+transformers
+faiss-cpu
+llama-parse
+
+# talk to web
+chromadb==0.5.3
+streamlit==1.28.1
+pysqlite3-binary
+FlagEmbedding
+pymilvus>=2.4.2
+langchain-experimental==0.0.62
+mysql-connector-python==9.0.0
+pymysql
+langchain-text-splitters
+mypy-extensions
+SQLAlchemy
+mysqlclient
+mysql
+plotly
+python-dotenv
+SpeechRecognition
+pyaudio
+# talk to db
+# path
+# mypy-extensions
+# mysql
+# mysql-connector-python
+# mysqlclient
+# SQLAlchemy
+# pymysql
+# langchain-experimental
+# langchain-text-splitters
