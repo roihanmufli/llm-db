@@ -39,7 +39,7 @@ mysql
 plotly
 python-dotenv
 htbuilder
-pyaudio
+# pyaudio
 # talk to db
 # path
 # mypy-extensions
