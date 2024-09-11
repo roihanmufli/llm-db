@@ -3,6 +3,7 @@ import os
 from src.data_prep import Prep
 from src.agent import SQLAgent
 from src.plotly_agent import VizAgent
+from src.layout import *
 import tempfile
 from pathlib import Path
 import shutil
@@ -17,6 +18,8 @@ import mysql.connector
 from mysql.connector import Error
 import uuid
 from datetime import datetime
+import base64
+
 
 # extracting text from document
 
@@ -150,12 +153,47 @@ def clear_chat_history():
         {"role": "assistant", "content": "ask me a question"}]
     
 def main():
+    st.set_page_config(page_title="Chat with multiple DOCUMENTs",page_icon="🤖")
+
+    image_file = "NANO.png"
+    with open(image_file, "rb") as image:
+        encoded_string = base64.b64encode(image.read())
+    st.markdown(
+        f"""
+        <style>
+        [data-testid="stBottom"] > div{{
+            background-color: transparent;
+        }}
+        [data-testid="stChatMessage"]{{
+            background-color: transparent;
+    
+        }}
+        [data-testid=stSidebar] {{
+            background-color: transparent;
+
+        }}
+        header[data-testid="stHeader"]{{
+            background-image: url(data:image/jpeg;base64,{encoded_string.decode()});
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 16%;
+        }}
+        
+        section[data-testid="stSidebar"] {{
+            top: 16%; 
+        }}
+        </style>""",
+        unsafe_allow_html=True,
+    )
+
+
 
     if "session_id" not in st.session_state:
         st.session_state["session_id"] = str(uuid.uuid4()) 
 
-    st.set_page_config(page_title="Chat with multiple DOCUMENTs",page_icon="🤖")
-    st.title("Chat to database")
+    add_background("nano_bg.png")
+    # st.title("Chat to database")
+    st.markdown("<h3 style='text-align: center; color: black;'>Chat to database</h3>", unsafe_allow_html=True)
     st.session_state.example_query_selector = get_example_query()
 
 
@@ -174,7 +212,6 @@ def main():
             else:
                 st.write(message["content"])
     
-
     with st.sidebar:
 
         options = ["gemini-1.5-flash", "gemini-1.5-pro-latest"]
@@ -185,23 +222,10 @@ def main():
     st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
     # st.sidebar.button('Clear VectorDB', on_click=clear_vector_db)
 
-        # Option for Voice or Text Input
-    input_method = st.radio("Choose your input method:", ("Text", "Voice"))
-
-    if input_method == "Voice":
-        if st.button("Start Listening"):
-            user_question = recognize_speech_from_microphone()
-            # st.write("You said: ", user_question)
-            st.chat_message("user").markdown(user_question)
-            st.session_state.messages.append({"role": "user", "content": user_question})
-            # with st.chat_message("user"):
-            #     st.write(user_question)
-
-    elif input_method == "Text":
-        user_question = st.chat_input("Ask a question...")
-        if user_question != None:
-            st.chat_message("user").markdown(user_question)
-            st.session_state.messages.append({"role": "user", "content": user_question})
+    user_question = st.chat_input("Ask a question...")
+    if user_question != None:
+        st.chat_message("user").markdown(user_question)
+        st.session_state.messages.append({"role": "user", "content": user_question})
         # with st.chat_message("user"):
         #     st.write(user_question)
 
@@ -345,7 +369,7 @@ def main():
                             st.session_state.messages.append({"role": "assistant", "content": response})
 
     full_response = st.session_state.messages[-1]['content']
-        # Feedback submission form
+    # Feedback submission form
     feedback = streamlit_feedback(
                 feedback_type="thumbs",
                 optional_text_label="[Optional] Please provide an explanation",
@@ -354,6 +378,7 @@ def main():
                 kwargs={"result": full_response},
             )
 
+    footer()
 
 
 if __name__ == '__main__':

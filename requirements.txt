@@ -38,7 +38,7 @@ mysqlclient
 mysql
 plotly
 python-dotenv
-SpeechRecognition
+htbuilder
 pyaudio
 # talk to db
 # path

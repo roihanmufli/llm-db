@@ -37,8 +37,8 @@ class SQLAgent:
         # Initialize Gemini Embeddings
         self.embeddings = GoogleGenerativeAIEmbeddings(
             model="models/embedding-001",
-            google_api_key=st.secrets["GOOGLE_API_KEY"]
-            # google_api_key=os.getenv("GOOGLE_API_KEY")
+            # google_api_key=st.secrets["GOOGLE_API_KEY"]
+            google_api_key=os.getenv("GOOGLE_API_KEY")
         )
 
         # Initialize Gemini Chat model
@@ -46,8 +46,8 @@ class SQLAgent:
             # model="models/gemini-1.5-pro-latest",
             model= str(model_usage),
             temperature=0,
-            google_api_key=st.secrets["GOOGLE_API_KEY"],
-            # google_api_key=os.getenv("GOOGLE_API_KEY"),
+            # google_api_key=st.secrets["GOOGLE_API_KEY"],
+            google_api_key=os.getenv("GOOGLE_API_KEY"),
             max_tokens=None,
             timeout=None,
             max_retries=2
@@ -56,8 +56,8 @@ class SQLAgent:
         self.example_query_selector = example_query_selector
         # self.mysql_uri = 'mysql+mysqlconnector://root:1234@localhost:3306/db_cc'
         # self.sqlite_uri = 'sqlite:///feedback.db'
-        # self.mysql_uri = f'mysql://avnadmin:{os.getenv("DB_PASSWORD")}@mysql-14927681-techconnect.h.aivencloud.com:13145/defaultdb'
-        self.mysql_uri = f'mysql://avnadmin:{st.secrets["DB_PASSWORD"]}@mysql-14927681-techconnect.h.aivencloud.com:13145/defaultdb'
+        self.mysql_uri = f'mysql://avnadmin:{os.getenv("DB_PASSWORD")}@mysql-14927681-techconnect.h.aivencloud.com:13145/defaultdb'
+        # self.mysql_uri = f'mysql://avnadmin:{st.secrets["DB_PASSWORD"]}@mysql-14927681-techconnect.h.aivencloud.com:13145/defaultdb'
         
 
         self.db = SQLDatabase.from_uri(self.mysql_uri,
