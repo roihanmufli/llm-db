@@ -12,7 +12,7 @@ import plotly.express as px
 import pandas as pd
 from google.api_core.exceptions import ServiceUnavailable
 import plotly.graph_objs as go
-import speech_recognition as sr
+# import speech_recognition as sr
 from streamlit_feedback import streamlit_feedback
 import mysql.connector
 from mysql.connector import Error
