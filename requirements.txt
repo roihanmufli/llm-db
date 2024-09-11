@@ -38,6 +38,7 @@ mysqlclient
 mysql
 plotly
 python-dotenv
+streamlit_feedback
 htbuilder
 # pyaudio
 # talk to db
