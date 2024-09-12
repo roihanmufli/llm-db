@@ -176,7 +176,7 @@ def main():
             background-image: url(data:image/jpeg;base64,{encoded_string.decode()});
             background-repeat: no-repeat;
             background-size: cover;
-            height: 16%;
+            height: 18%;
         }}
         
         section[data-testid="stSidebar"] {{
@@ -187,13 +187,18 @@ def main():
     )
 
 
+    add_background("./assets/app_bg.png")
+
+    st.markdown("<h3 style='text-align: center; color: black;'>Knowledge Assistant</h3>", unsafe_allow_html=True)
+
+
 
     if "session_id" not in st.session_state:
         st.session_state["session_id"] = str(uuid.uuid4()) 
 
     add_background("nano_bg.png")
     # st.title("Chat to database")
-    st.markdown("<h3 style='text-align: center; color: black;'>Chat to database</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='text-align: center; color: black;'>Analytics Assistant</h3>", unsafe_allow_html=True)
     st.session_state.example_query_selector = get_example_query()
 
 
