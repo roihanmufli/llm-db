@@ -164,6 +164,12 @@ def main():
         [data-testid="stBottom"] > div{{
             background-color: transparent;
         }}
+
+        .stChatFloatingInputContainer {{
+            background-color: transparent;
+        }}
+
+
         [data-testid="stChatMessage"]{{
             background-color: transparent;
     
