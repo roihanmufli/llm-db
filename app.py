@@ -187,12 +187,6 @@ def main():
     )
 
 
-    add_background("./assets/app_bg.png")
-
-    st.markdown("<h3 style='text-align: center; color: black;'>Knowledge Assistant</h3>", unsafe_allow_html=True)
-
-
-
     if "session_id" not in st.session_state:
         st.session_state["session_id"] = str(uuid.uuid4()) 
 
