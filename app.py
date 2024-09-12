@@ -150,7 +150,7 @@ def handle_feedback(user_response,result):
 
 def clear_chat_history():
     st.session_state.messages = [
-        {"role": "assistant", "content": "ask me a question"}]
+        {"role": "assistant", "content": "Hello, Analytics Assisant siap membantu Anda untuk menjawab pertanyaan sesuai dengan data yang ada"}]
     
 def main():
     st.set_page_config(page_title="Analytics Assistant",page_icon="🤖")
@@ -207,7 +207,7 @@ def main():
 
     if "messages" not in st.session_state:
         st.session_state.messages = [
-            {"role": "assistant", "content": "Hello! Ask the question to talk to database"}
+            {"role": "assistant", "content": "Hello, Analytics Assisant siap membantu Anda untuk menjawab pertanyaan sesuai dengan data yang ada"}
         ]
 
     for message in st.session_state.messages:

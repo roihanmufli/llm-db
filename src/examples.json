@@ -18,10 +18,10 @@
      "query": "SELECT SUM(`amount`) FROM defaultdb.dummy_trx"
     },
     {"input": "total transaksi keluar atau debit year-to-date (ytd)", 
-     "query": "SELECT SUM(`debit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx)"
+     "query": "SELECT SUM(`debit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) >= (SELECT MONTH(MIN(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) <= (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx) "
     },
     {"input": "total transaksi masuk atau kredit year-to-date (ytd)", 
-     "query": "SELECT SUM(`credit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx)"
+     "query": "SELECT SUM(`credit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) >= (SELECT MONTH(MIN(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) <= (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx)"
     },
     {"input": "total transaksi keluar atau debit month-to-date (mtd)", 
      "query": "SELECT SUM(`debit_amount`) FROM defaultdb.dummy_trx WHERE MONTH(`date`) = (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx) AND YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx)"
@@ -33,7 +33,7 @@
      "query": "SELECT SUM(`amount`) FROM defaultdb.dummy_trx WHERE MONTH(`date`) = (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx) AND YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx)"
     },
     {"input": "total transaksi keseluruhan year-to-date (ytd)", 
-     "query": "SELECT SUM(`amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx)"
+     "query": "SELECT SUM(`amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) >= (SELECT MONTH(MIN(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) <= (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx)"
     },
     {"input": "jumlah transaksi keluar atau debit", 
      "query": "SELECT COUNT(`debit_amount`) FROM defaultdb.dummy_trx WHERE `debit_amount` != 0"
@@ -42,10 +42,10 @@
      "query": "SELECT COUNT(`credit_amount`) FROM defaultdb.dummy_trx WHERE `credit_amount` != 0"
     },
     {"input": "jumlah transaksi keluar atau debit year-to-date (ytd)", 
-     "query": "SELECT COUNT(`debit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND `debit_amount` != 0"
+     "query": "SELECT COUNT(`debit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) >= (SELECT MONTH(MIN(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) <= (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx) AND `debit_amount` != 0"
     },
     {"input": "jumlah transaksi masuk atau kredit year-to-date (ytd)", 
-     "query": "SELECT COUNT(`credit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND `credit_amount` != 0"
+     "query": "SELECT COUNT(`credit_amount`) FROM defaultdb.dummy_trx WHERE YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) >= (SELECT MONTH(MIN(`date`)) FROM defaultdb.dummy_trx) AND MONTH(`date`) <= (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx) AND `credit_amount` != 0"
     },
     {"input": "jumlah transaksi keluar atau debit month-to-date (mtd)", 
      "query": "SELECT COUNT(`debit_amount`) FROM defaultdb.dummy_trx WHERE MONTH(`date`) = (SELECT MONTH(MAX(`date`)) FROM defaultdb.dummy_trx) AND YEAR(`date`) = (SELECT YEAR(MAX(`date`)) FROM defaultdb.dummy_trx) AND `debit_amount` != 0"
@@ -67,6 +67,11 @@
     },
     {"input": "berapa total transaksi di bulan mei sampai juni 2022", 
      "query": "SELECT SUM(`amount`) AS total_transaksi FROM defaultdb.dummy_trx WHERE MONTH(`date`) IN (5, 6) AND YEAR(`date`) = 2022"
+    },
+    {"input": "total transaksi debit per bulan 5 bulan terakhir", 
+     "query": "ELECT SUM(debit_amount) AS total_debit, MONTH(`date`) FROM dummy_trx WHERE date BETWEEN DATE_SUB(CURDATE(), INTERVAL 5 MONTH) AND CURDATE() GROUP BY MONTH(date) ORDER BY MONTH(date) DESC"
     }
+
+    
     
 ]

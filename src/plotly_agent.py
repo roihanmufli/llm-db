@@ -113,7 +113,7 @@ class VizAgent:
             If you identify user wants "visualization". Please analyze what kind of visualization and respond with either "line chart" if the user wants a line chart, "bar chart" if the user wants bar chart,"table" if the user wants table, "scatter plot" if the user wants scatter plot, or "pie chart" if the user wants pie chart
             If there is neither words of "visualization", "line chart", "bar chart", "pie chart", nor "scatter plot" please give response "query"
             Please give chart title refer to user input.
-            I want your response could be the following:
+            I want your response could be the following format:
             kind chart:
             title:
             User input: "{input}"
