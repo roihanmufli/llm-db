@@ -153,7 +153,7 @@ def clear_chat_history():
         {"role": "assistant", "content": "ask me a question"}]
     
 def main():
-    st.set_page_config(page_title="Chat with multiple DOCUMENTs",page_icon="🤖")
+    st.set_page_config(page_title="Analytics Assistant",page_icon="🤖")
 
     image_file = "NANO.png"
     with open(image_file, "rb") as image:
